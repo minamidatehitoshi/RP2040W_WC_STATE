@@ -10,13 +10,13 @@ import ubinascii
 # PASSWORD = 'xxxxxx'
 
 # home 
-SSID = 'aterm-e96fa7-a'
-PASSWORD = '33d30d0e290a9'
+# SSID = 'aterm-e96fa7-a'
+# PASSWORD = '33d30d0e290a9'
 
 # eight 3F
 # # SSID = 'TP-Link_53BC_5G'
-# SSID = 'TP-Link_53BC'
-# PASSWORD = '42365686'
+SSID = 'TP-Link_53BC'
+PASSWORD = '42365686'
 
 PORT = 80
 #ルーティングテーブル
@@ -39,7 +39,7 @@ CONTENT_TYPE = {
 }
 #アクションテーブル
 #Raspberry Pi PICO Wで何か制御したいときは、ここに処理を記述してください
-# LED = machine.Pin("LED", machine.Pin.OUT)
+LED = machine.Pin("LED", machine.Pin.OUT)
 TEMPERATURE_SENSOR = machine.ADC(4)
 def get_temperature():
     conversion_factor = 3.3 / (65535)
@@ -55,12 +55,14 @@ def get_usage_status():
         ret0 = "ON"
         ret1 = "#F06060"
         ret2 = "occupied"
-#        machine.Pin('LED', machine.Pin.OUT).on()
+        # machine.Pin('LED', machine.Pin.OUT).on()
+        LED.value(1)      # LEDを点灯
     else:
         ret0 = "OFF"
         ret1 = "#6060F0"
         ret2 = "vacant"
-#        machine.Pin('LED', machine.Pin.OUT).off()
+        # machine.Pin('LED', machine.Pin.OUT).off()
+        LED.value(0)      # LEDを消灯
 
     return ret0, ret1, ret2
     
